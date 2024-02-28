@@ -11,10 +11,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: 'your_mysql_host',
-  user: 'your_mysql_user',
-  password: 'your_mysql_password',
-  database: 'your_database_name',
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'taskmulti',
 });
 
 db.connect(err => {
