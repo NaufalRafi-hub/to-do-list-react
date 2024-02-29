@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskForm from './component/TaskForm';
 import TaskList from './component/TaskList';
+import TaskForm2 from './component/TaskForm2';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './component/Login';
+import Register from './component/Register';
+import { Container, Tab, Tabs } from 'react-bootstrap';
+
+// import './App.css'
+
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,13 +22,18 @@ const App = () => {
       .catch(error => console.error('Error fetching tasks', error));
   }, []);
 
-  const addTask = ({text}) => {
-    const newTask = { text };
+  // const addTask = ({text}) => {
+  //   const newTask = { text };
+  //   axios.post('http://localhost:8081/api/tasks', newTask)
+  //     .then(response => setTasks([...tasks, response.data]))
+  //     .catch(error => console.error('Error adding task', error));
+  // };
+  const addTask = ({judul, deskripsi, status}) => {
+    const newTask = { judul, deskripsi, status };
     axios.post('http://localhost:8081/api/tasks', newTask)
       .then(response => setTasks([...tasks, response.data]))
       .catch(error => console.error('Error adding task', error));
   };
-
   const deleteTask = (id) => {
     axios.delete(`http://localhost:8081/api/tasks/${id}`)
       .then(() => setTasks(tasks.filter(task => task.id !== id)))
@@ -41,17 +54,41 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTaskHandler} />
-      {editTask && (
-        <div>
-          <h2>Edit Task</h2>
-          <TaskForm onSubmit={updateTask} initialTask={editTask} />
-        </div>
-      )}
+    <div style={{ marginTop: 50 }}>
+      <Container>
+      
+      <Tabs
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="home" title="To Do">
+        <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+        <TaskForm onSubmit={addTask} />
+        {/* <TaskForm2 /> */}
+        <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTaskHandler} />
+        {editTask && (
+          <div>
+            <h2>Edit Task</h2>
+            <TaskForm onSubmit={updateTask} initialTask={editTask} />
+          </div>
+        )}
+      </Tab>
+      <Tab eventKey="profile" title="Profile">
+        Tab content for Profile
+      </Tab>
+    </Tabs>
+      {/* <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </div>
+    </Router> */}
+    </Container>
     </div>
+
   );
 };
 
