@@ -1,7 +1,12 @@
 // TaskForm.js
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const TaskForm = ({ onSubmit, initialTask }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   // const [task, setTask] = useState(initialTask ? initialTask.text : '');
   const [task, setTask] = useState(initialTask ? initialTask.judul : '');
   const [desc, setDesc] = useState(initialTask ? initialTask.deskripsi : '');
@@ -29,44 +34,50 @@ const TaskForm = ({ onSubmit, initialTask }) => {
   }, [initialTask]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <input
-        type="text"
-        placeholder="Add a new task"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Add a new description"
-        value={desc}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Add a status"
-        value={status}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <button type="submit">{initialTask ? 'Update Task' : 'Add Task'}</button> */}
-        <div>
-          <label>Judul:</label>
-          <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
-        </div>
-        <div>
-          <label>Deskripsi:</label>
-          <textarea value={desc} onChange={(e) => setDesc(e.target.value)} />
-        </div>
-        <div>
-          <label>Status:</label>
-          <select value={status} onChange={(e) => setStatus(parseInt(e.target.value))}>
-            <option value={0}>On Progress</option>
-            <option value={1}>Done</option>
-          </select>
-        </div>
-        <button type="submit">{initialTask ? 'Update Task' : 'Add Task'}</button>
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        {initialTask ? 'Update Task' : 'Add Task'}
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add a New Task</Modal.Title>
+        </Modal.Header>
+        <form onSubmit={handleSubmit}>
+        <Modal.Body>
+              
+                <div>
+                  <label>Judul:</label>
+                  <input type="text" value={task} onChange={(e) => setTask(e.target.value)} />
+                </div>
+                <div>
+                  <label>Deskripsi:</label>
+                  <textarea value={desc} onChange={(e) => setDesc(e.target.value)} />
+                </div>
+                <div>
+                  <label>Status:</label>
+                  <select value={status} onChange={(e) => setStatus(parseInt(e.target.value))}>
+                    <option value={0}>On Progress</option>
+                    <option value={1}>Done</option>
+                  </select>
+                </div>
+                {/* <button type="submit">{initialTask ? 'Update Task' : 'Add Task'}</button> */}
 
-    </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose} type='submit'>
+            {initialTask ? 'Update Task' : 'Add Task'}
+          </Button>
+          
+        </Modal.Footer>
+        </form>
+
+      </Modal>
+    
+    </>
+    
   );
 };
 

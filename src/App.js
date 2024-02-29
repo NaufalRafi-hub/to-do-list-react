@@ -63,16 +63,19 @@ const App = () => {
       className="mb-3"
     >
       <Tab eventKey="home" title="To Do">
-        <h1 style={{ textAlign: 'center' }}>Todo List</h1>
-        <TaskForm onSubmit={addTask} />
-        {/* <TaskForm2 /> */}
-        <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTaskHandler} />
-        {editTask && (
-          <div>
-            <h2>Edit Task</h2>
-            <TaskForm onSubmit={updateTask} initialTask={editTask} />
-          </div>
-        )}
+        <section>
+          <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+          <TaskForm onSubmit={addTask} />
+          {/* <TaskForm2 /> */}
+          <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTaskHandler} />
+          {editTask && (
+            <div>
+              <h2>Edit Task</h2>
+              <TaskForm onSubmit={updateTask} initialTask={editTask} />
+            </div>
+          )}
+        </section>
+        
       </Tab>
       <Tab eventKey="profile" title="Profile">
         Tab content for Profile

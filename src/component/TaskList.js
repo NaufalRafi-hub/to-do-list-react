@@ -5,7 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 const TaskList = ({ tasks, onDelete, onEdit }) => {
   // console.log (tasks);
   return (
-    <div>
+    <div style={{marginTop: '40px'}}>
       {tasks.map((task) => (
         // <li key={task.id}>
           <Accordion defaultActiveKey='0' key={task.id}>
