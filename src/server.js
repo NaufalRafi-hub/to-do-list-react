@@ -5,7 +5,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 
 const app = express();
-const PORT = 3001;
+// const PORT = 3306;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,7 +16,7 @@ const db = mysql.createConnection({
   password: '',
   database: 'taskmulti',
 });
-
+console.log(db)
 db.connect(err => {
   if (err) {
     console.error('Error connecting to MySQL:', err);
@@ -61,4 +61,19 @@ app.delete('/api/tasks/:id', (req, res) => {
   });
 });
 
-app.listen
+app.put('/api/tasks/:id', (req, res) => {
+  const taskId = req.params.id;
+  const updatedTask = { text: req.body.text };
+  db.query('UPDATE tasks SET ? WHERE id = ?', [updatedTask, taskId], (err) => {
+    if (err) {
+      console.error('Error updating task in MySQL:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(updatedTask);
+    }
+  });
+});
+
+app.listen(8081, ()=>{
+  console.log("Listening on port 8081");
+})

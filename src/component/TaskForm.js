@@ -1,16 +1,23 @@
 // TaskForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const TaskForm = ({ onSubmit }) => {
-  const [task, setTask] = useState('');
+const TaskForm = ({ onSubmit, initialTask }) => {
+  const [task, setTask] = useState(initialTask ? initialTask.text : '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task.trim() !== '') {
-      onSubmit(task);
+      onSubmit({
+        id: initialTask ? initialTask.id : null,
+        text: task,
+      });
       setTask('');
     }
   };
+
+  useEffect(() => {
+    setTask(initialTask ? initialTask.text : '');
+  }, [initialTask]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -20,7 +27,7 @@ const TaskForm = ({ onSubmit }) => {
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <button type="submit">Add Task</button>
+      <button type="submit">{initialTask ? 'Update Task' : 'Add Task'}</button>
     </form>
   );
 };
