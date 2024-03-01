@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from "../hooks/useAuth";
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -23,15 +23,18 @@ function Login() {
 
   return (
     <Container>
-      <div style={{marginTop: '40px'}}>
+      <div style={{marginTop: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <h2>Login</h2>
-        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button onClick={handleLogin}>Login</button>  
-
-        <div>
-          <p>belum punya account?</p>
-          <a href="/register">Register</a>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '40px', marginTop: '40px'}}>
+          <input style={{borderRadius: '10px', padding: '10px'}} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input style={{borderRadius: '10px', padding: '10px'}} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        
+          {/* <button onClick={handleLogin}>Login</button>   */}
+          <Button style={{paddingLeft: '40px', paddingRight: '40px'}}onClick={handleLogin}>Login</Button>
+        <div style={{marginTop: '40px'}}>
+          <p>belum punya account?<a href="/register"> Register</a></p>
+          
         </div>    
       </div>
     </Container>
