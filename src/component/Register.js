@@ -48,6 +48,10 @@ function Register() {
         </div>
         <button type="submit">Daftar</button>
       </form>
+      <div>
+        <p>sudah punya account?</p>
+        <a href="/">Login</a>
+      </div>    
       {message && <p>{message}</p>}
     </div>
   );

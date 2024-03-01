@@ -25,7 +25,12 @@ function Login() {
       <h2>Login</h2>
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={handleLogin}>Login</button>      
+        <button onClick={handleLogin}>Login</button>  
+
+      <div>
+        <p>belum punya account?</p>
+        <a href="/register">Register</a>
+        </div>    
     </div>
   );
 }
