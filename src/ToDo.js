@@ -4,19 +4,15 @@ import axios from 'axios';
 import TaskForm from './component/TaskForm';
 import TaskList from './component/TaskList';
 import TaskForm2 from './component/TaskForm2';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './component/Login';
 import Register from './component/Register';
 import { Container, Tab, Tabs } from 'react-bootstrap';
-import { Routes, Route } from "react-router-dom";
-import ToDo from './ToDo';
-import { ProtectedRoute } from "./component/ProtectedRoute";
-import { AuthProvider } from "./hooks/useAuth";
 
 // import './App.css'
 
 
-const App = () => {
+const ToDo = () => {
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
 
@@ -58,20 +54,37 @@ const App = () => {
   };
 
   return (
-    <AuthProvider>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/todo" element={
-        <ProtectedRoute>
-          <ToDo />
-        </ProtectedRoute>
-        } />
-      <Route path="/register" element={<Register />} />
-
-    </Routes>
-    </AuthProvider>
+    <div style={{ marginTop: 50 }}>
+      <Container>
+      
+      <Tabs
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="home" title="To Do">
+        <section>
+          <h1 style={{ textAlign: 'center' }}>Todo List</h1>
+          <TaskForm onSubmit={addTask} />
+          {/* <TaskForm2 /> */}
+          <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTaskHandler} />
+          {editTask && (
+            <div>
+              <h2>Edit Task</h2>
+              <TaskForm onSubmit={updateTask} initialTask={editTask} />
+            </div>
+          )}
+        </section>
+        
+      </Tab>
+      <Tab eventKey="profile" title="Profile">
+        Tab content for Profile
+      </Tab>
+    </Tabs>
+    </Container>
+    </div>
 
   );
 };
 
-export default App;
+export default ToDo;

@@ -5,7 +5,6 @@ const cors = require('cors');
 const mysql = require('mysql');
 
 const app = express();
-// const PORT = 3306;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -60,15 +59,15 @@ app.post('/api/tasks', (req, res) => {
   });
 });
 
-app.get('/api/tasks', (req, res) => {
-  const sql = 'SELECT * FROM tasks';
-  db.query(sql, (err, results) => {
-    if (err) {
-      throw err;
-    }
-    res.json(results);
-  });
-});
+// app.get('/api/tasks', (req, res) => {
+//   const sql = 'SELECT * FROM tasks';
+//   db.query(sql, (err, results) => {
+//     if (err) {
+//       throw err;
+//     }
+//     res.json(results);
+//   });
+// });
 
 app.post('/api/register', (req, res) => {
   const { username, password } = req.body;
