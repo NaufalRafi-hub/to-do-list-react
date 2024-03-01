@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -33,26 +33,24 @@ function Register() {
 
   return (
     <Container>
-      <div style= {{marginTop: '40px'}}>
+      <div style= {{marginTop: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <h2>Registrasi</h2>
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleRegister} style={{display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '40px', marginTop: '40px'}}>
           <div>
-            <label>Username:</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input style={{borderRadius: '10px', padding: '10px'}} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input style={{borderRadius: '10px', padding: '10px'}} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div>
-            <label>Konfirmasi Password:</label>
-            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <input style={{borderRadius: '10px', padding: '10px'}} type="password" placeholder="Konfirmasi Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
           </div>
-          <button type="submit">Daftar</button>
+          {/* <button type="submit">Daftar</button> */}
+          <Button type="submit" style={{paddingLeft: '40px', paddingRight: '40px'}}>Daftar</Button>
         </form>
         <div>
-          <p>sudah punya account?</p>
-          <a href="/">Login</a>
+          <p>sudah punya account? <a href="/">Login</a></p>
+          
         </div>    
         {message && <p>{message}</p>}
       </div>
