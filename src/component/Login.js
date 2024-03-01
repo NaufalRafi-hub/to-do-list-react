@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 function Login() {
@@ -26,9 +25,9 @@ function Login() {
       <h2>Login</h2>
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <Link to="/todo">
+      {/* <Link to="/todo"> */}
         <button onClick={handleLogin}>Login</button>
-      </Link>
+      {/* </Link> */}
       
     </div>
   );
