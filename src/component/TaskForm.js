@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useAuth } from "../hooks/useAuth";
+
 
 const TaskForm = ({ onSubmit, initialTask }) => {
   const [show, setShow] = useState(false);
@@ -11,7 +13,7 @@ const TaskForm = ({ onSubmit, initialTask }) => {
   const [task, setTask] = useState(initialTask ? initialTask.judul : '');
   const [desc, setDesc] = useState(initialTask ? initialTask.deskripsi : '');
   const [status, setStatus] = useState(initialTask ? initialTask.status : 0);
-
+  const { logout } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task.trim() !== '') {
@@ -27,6 +29,10 @@ const TaskForm = ({ onSubmit, initialTask }) => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+  }
+
   useEffect(() => {
     setTask(initialTask ? initialTask.judul : '');
     setDesc(initialTask ? initialTask.deskripsi : '');
@@ -37,6 +43,9 @@ const TaskForm = ({ onSubmit, initialTask }) => {
     <>
       <Button variant="primary" onClick={handleShow}>
         {initialTask ? 'Update Task' : 'Add Task'}
+      </Button>
+      <Button onClick={handleLogout}>
+        Logout
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
