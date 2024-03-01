@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from "../hooks/useAuth";
+import { Container } from 'react-bootstrap';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -21,17 +22,20 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={handleLogin}>Login</button>  
+    <Container>
+      <div style={{marginTop: '40px'}}>
+        <h2>Login</h2>
+        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button onClick={handleLogin}>Login</button>  
 
-      <div>
-        <p>belum punya account?</p>
-        <a href="/register">Register</a>
+        <div>
+          <p>belum punya account?</p>
+          <a href="/register">Register</a>
         </div>    
-    </div>
+      </div>
+    </Container>
+    
   );
 }
 

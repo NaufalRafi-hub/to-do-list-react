@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -31,29 +32,32 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Registrasi</h2>
-      <form onSubmit={handleRegister}>
+    <Container>
+      <div style= {{marginTop: '40px'}}>
+        <h2>Registrasi</h2>
+        <form onSubmit={handleRegister}>
+          <div>
+            <label>Username:</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <div>
+            <label>Konfirmasi Password:</label>
+            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          </div>
+          <button type="submit">Daftar</button>
+        </form>
         <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <div>
-          <label>Konfirmasi Password:</label>
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-        </div>
-        <button type="submit">Daftar</button>
-      </form>
-      <div>
-        <p>sudah punya account?</p>
-        <a href="/">Login</a>
-      </div>    
-      {message && <p>{message}</p>}
-    </div>
+          <p>sudah punya account?</p>
+          <a href="/">Login</a>
+        </div>    
+        {message && <p>{message}</p>}
+      </div>
+    </Container>
+    
   );
 }
 
