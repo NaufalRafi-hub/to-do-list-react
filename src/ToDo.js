@@ -3,14 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskForm from './component/TaskForm';
 import TaskList from './component/TaskList';
-import TaskForm2 from './component/TaskForm2';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './component/Login';
-import Register from './component/Register';
+// import TaskForm2 from './component/TaskForm2';
 import { Container, Tab, Tabs } from 'react-bootstrap';
-
-// import './App.css'
-
 
 const ToDo = () => {
   const [tasks, setTasks] = useState([]);
@@ -22,12 +16,6 @@ const ToDo = () => {
       .catch(error => console.error('Error fetching tasks', error));
   }, []);
 
-  // const addTask = ({text}) => {
-  //   const newTask = { text };
-  //   axios.post('http://localhost:8081/api/tasks', newTask)
-  //     .then(response => setTasks([...tasks, response.data]))
-  //     .catch(error => console.error('Error adding task', error));
-  // };
   const addTask = ({judul, deskripsi, status}) => {
     const newTask = { judul, deskripsi, status };
     axios.post('http://localhost:8081/api/tasks', newTask)

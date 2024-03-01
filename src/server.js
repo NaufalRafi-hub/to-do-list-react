@@ -35,19 +35,6 @@ app.get('/api/tasks', (req, res) => {
   });
 });
 
-// app.post('/api/tasks', (req, res) => {
-//   const newTask = { text: req.body.text };
-//   db.query('INSERT INTO tasks SET ?', newTask, (err, result) => {
-//     if (err) {
-//       console.error('Error adding task to MySQL:', err);
-//       res.status(500).send('Internal Server Error');
-//     } else {
-//       newTask.id = result.insertId;
-//       res.json(newTask);
-//     }
-//   });
-// });
-
 app.post('/api/tasks', (req, res) => {
   const { judul, deskripsi, status } = req.body;
   const sql = 'INSERT INTO tasks (judul, deskripsi, status) VALUES (?, ?, ?)';
@@ -58,16 +45,6 @@ app.post('/api/tasks', (req, res) => {
     res.send('Tugas ditambahkan');
   });
 });
-
-// app.get('/api/tasks', (req, res) => {
-//   const sql = 'SELECT * FROM tasks';
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       throw err;
-//     }
-//     res.json(results);
-//   });
-// });
 
 app.post('/api/register', (req, res) => {
   const { username, password } = req.body;
